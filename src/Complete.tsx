@@ -1,8 +1,14 @@
 import { Menu, Home, Pen, Clock, User, Goal } from "lucide-react";
 import Button from "./Button";
 import { useNavigate } from 'react-router-dom'
-
+import { useEffect, useState } from "react";
 const Complete = () =>{
+    const [finishedItems, setFinishedItems] = useState<string[]>([]);
+  
+    useEffect(() => {
+      const savedFinishedItems = JSON.parse(localStorage.getItem('finishitem') || '[]');
+      setFinishedItems(savedFinishedItems);
+    }, []);
 const navigate = useNavigate()
     const goToPage = (path: string) => {
         navigate(path);}
@@ -36,7 +42,20 @@ const navigate = useNavigate()
     </div>  
 
         <div>
-        
+        <div className="flex flex-col items-center pt-5">
+          <h1 className="text-3xl font-bold mb-4">Tâches Terminées</h1>
+          <ul>
+            {finishedItems.length > 0 ? (
+              finishedItems.map((item, index) => (
+                <li key={index} className="p-4 mt-8 bg-gray-100 border-b">
+                  {item}
+                </li>
+              ))
+            ) : (
+              <p>Aucune tâche terminée</p>
+            )}
+          </ul>
+        </div>
     
         </div>
     

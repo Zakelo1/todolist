@@ -13,7 +13,7 @@ const Editer = () => {
     const [items, setItems] = useState<string[]>([]);
     const [newItem, setNewItem] = useState<string>("");
     const [userId, setUserId] = useState<string>("");
-
+    const [copyItem, setCopyItem] = useState<string[]>([]);
     useEffect(() => {
         const storedUserId = localStorage.getItem("loggedInUserId");
         console.log('User ID from localStorage:', storedUserId); 
@@ -26,7 +26,7 @@ const Editer = () => {
             console.log('No user ID found, please log in!');
         }
     }, []);
-    
+
     const addItem = () => {
         console.log('Adding item:', newItem); 
         console.log('User ID:', userId); 
@@ -35,12 +35,17 @@ const Editer = () => {
             const updatedItems = [...items, newItem];
             setItems(updatedItems);
             saveTasksToLocalStorage(updatedItems); 
+            setCopyItem((prevCopy) => {
+                const updatedCopy = [...prevCopy, newItem];
+                localStorage.setItem('copyItem', JSON.stringify(updatedCopy)); // Sauvegarde dans localStorage
+                return updatedCopy;
+            });
             setNewItem(""); 
         } else {
             console.log('Item is empty or user is not logged in');
         }
     };
-   
+
 
     const deleteItem = (index: number) => {
         const updatedItems = items.filter((_, itemIndex) => itemIndex !== index);

@@ -1,4 +1,4 @@
-import { Menu, Home, User, Clock, Pen, Goal } from 'lucide-react';
+import { Menu, Home, User, Clock, Pen, Goal, LogOut, LogIn } from 'lucide-react';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 import { saveUserDataToLocalStorage, getUserDataFromLocalStorage, UserData } from './localStorageUtils';
@@ -72,11 +72,11 @@ const Account = () => {
 
             <div className="flex flex-col items-center mt-16">
                 {isLoggedIn ? (
-                    <div>
+                    <div className='flex justify-center'>
                         <p>Bienvenue, {userId}!</p>
-                        <button onClick={handleLogout} className="p-2 bg-red-500 text-white rounded">
-                            Se déconnecter
-                        </button>
+                        <Button onClick={handleLogout} className="absolute mt-10 p-2 bg-red-500 text-white rounded">
+                            <LogOut/>
+                        </Button>
                     </div>
                 ) : (
                     <>
@@ -87,9 +87,9 @@ const Account = () => {
                             onChange={(e) => setUserId(e.target.value)}
                             className="mb-4 p-2 border rounded"
                         />
-                        <button onClick={handleLogin} className="p-2 bg-blue-500 text-white rounded">
-                            Se connecter
-                        </button>
+                        <Button onClick={handleLogin} className="p-2 bg-blue-500 text-white rounded">
+                            <LogIn/>
+                        </Button>
                     </>
                 )}
             </div>
