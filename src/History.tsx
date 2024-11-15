@@ -13,7 +13,7 @@ const History = () => {
     useEffect(() => {
         const savedCopyItem = localStorage.getItem('copyItem');
         if (savedCopyItem) {
-            setCopyItem(JSON.parse(savedCopyItem)); // On le met dans l'état de ce composant
+            setCopyItem(JSON.parse(savedCopyItem)); 
         }
     }, []);
 
@@ -25,7 +25,7 @@ const History = () => {
           <Button variant="ghost" size="icon" onClick={()=> goToPage('/app')}>
             <Menu />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={()=> goToPage('/')} >
             <Home />
           </Button>
         </div>
